@@ -68,3 +68,18 @@ for i in range(len(casos)):  # Calcula las predicciones y sus errores
 
 porcentaje_error = error_porcentaje(errores)
 print("Porcentaje de error:", porcentaje_error, "%")
+
+peso = 0.0                 # El peso inicial que queremos ajustar
+objetivo = 1               # La salida correcta que queremos alcanzar
+cambio = 0.01              # Un cambio pequeño para medir la pendiente
+tasa_aprendizaje = 0.1      # Controla el tamaño del ajuste del peso
+
+error_inicial = error_cuad(sigmoide(peso), objetivo)
+error_con_cambio = error_cuad(sigmoide(peso + cambio), objetivo)
+
+pendiente = (error_con_cambio - error_inicial) / cambio
+peso_nuevo = peso - tasa_aprendizaje * pendiente
+
+error_final = error_cuad(sigmoide(peso_nuevo), objetivo)
+print("Error inicial:", error_inicial)
+print("Error final:", error_final)
