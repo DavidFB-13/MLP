@@ -7,15 +7,12 @@ def suma_ponderada(entradas, pesos):  # Calcula la suma ponderada
 def calcular_z(entradas, pesos, sesgo):  # Suma ponderada más sesgo
     return suma_ponderada(entradas, pesos) + sesgo
 
-def escalon(z):  # Devuelve 0 o 1 según z
-    if z >= 0:
-        return 1
-    else:
-        return 0
+def sigmoide(z): # Escalón suavizado (Esc: 0/1. Sgm: 0-1 (con decimales))
+    return 1 / (1 + np.exp(-z))
 
 def neurona(entradas, pesos, sesgo):  # Calcula la salida de una neurona
     z = calcular_z(entradas, pesos, sesgo)
-    return escalon(z)
+    return sigmoide(z)
 
 def capa_oculta(entradas, pesos, sesgos):  # Calcula las cuatro salidas ocultas
     salidas = []
